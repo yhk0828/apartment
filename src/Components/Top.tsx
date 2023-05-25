@@ -76,7 +76,7 @@ function Top() {
   const navigate = useNavigate();
   const isLoggedIn2 = useRecoilValue(isLoggedInState2);
   const [keyword, setkeyword] = useRecoilState(keywordState);
-  const CodeApi = async () => {
+  const CodeApi = async (keyword:string) => {
       setIsLoading(true);
       try {
         const response1 = await axios.get(
@@ -199,7 +199,7 @@ function Top() {
   function handleKeyDown(event:React.KeyboardEvent<HTMLInputElement>) {
       if (event.keyCode === 13) { 
         navigate(`/search/${keyword}`);
-        CodeApi();
+        CodeApi(keyword);
       }
   }
   // 키워드 검색
@@ -248,7 +248,7 @@ function Top() {
                 placeholder="동 입력 ex)중계동" />
                 <Searchb onClick={()=>{
                     navigate(`/search/${keyword}`);
-                    CodeApi();
+                    CodeApi(keyword);
                     }}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </Searchb>

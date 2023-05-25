@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useEffect} from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {Apartment, ClickedState, dataState, formatPrice, InfoState,isLoggedInState2, NumberState, NumberState2, NumberState3} from '../recoil/atom';
+import {Apartment, ClickedState, dataState, formatPrice, InfoState,isLoggedInState2, keywordState, NumberState, NumberState2, NumberState3} from '../recoil/atom';
 import { faAngleRight,faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
@@ -67,7 +67,7 @@ function Bottom() {
     const isLoggedIn2 = useRecoilValue(isLoggedInState2);
     const navigate = useNavigate();
     const location = useLocation();
-    const {kkeyword} = useParams();
+    const [keyword, setkeyword] = useRecoilState(keywordState);
 
     function prev () {
         if(clicked === 1){
@@ -91,7 +91,7 @@ function Bottom() {
       setDataNum3(index);
       setInfo([item]);
       if(isLoggedIn2 === true){
-        navigate(`/search/${kkeyword}/${dataNum + index}`);
+        navigate(`/search/${keyword}/${dataNum + index}`);
       }else if(isLoggedIn2 === false){
         navigate(`/Login`);
       }

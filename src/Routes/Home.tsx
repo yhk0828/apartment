@@ -126,7 +126,7 @@ function Home() {
         });
       }
     }
-  }, [data, isLoggedIn2,Location,keyword]);
+  }, [data, Location]);
   function ControlMyinfo() {
     if (isLoggedIn2 === false) {
       navigate("/Login");
