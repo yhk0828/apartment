@@ -1,0 +1,45 @@
+.infocontents {
+    text-align: center;
+    color:white;
+    font-size: 12px;
+    background: #2252ef;
+    display: inline-block;
+    height: 35px;
+    margin-left: 20px;
+    margin-top: 55px;
+    position: relative;
+    width: 60px;
+}
+.infocontents:hover{
+    background: #2272ef;
+    cursor: pointer;
+}
+.infocontents:before {
+    border-bottom: 25px solid #2252ef;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    margin-left: -10px;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: -25px;
+    width: 0;
+}
+.infocontents:hover:before {
+    border-bottom: 25px solid #2272ef;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    margin-left: -10px;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: -25px;
+    width: 0;
+}
+
+.deal {
+    font-size: 13px;
+    font-weight: 700;
+}
