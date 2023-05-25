@@ -150,7 +150,7 @@ function Home() {
         <Sidebar>
             <Top></Top>
           <Routes>
-            <Route path="/apartment" element={<div />} />
+            <Route path="/" element={<div />} />
             <Route path="/MyInfo" element={<Myinfo />} />
             <Route path="/Login" element={<LoginForm />} />
             <Route path="/search/:kkeyword" element={<Bottom/>} />

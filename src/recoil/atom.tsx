@@ -109,8 +109,6 @@ export const favlocationState = atom({
   key: 'favlocationState',
   default: "",
 });
-
-
 export function formatPrice(price:number) {
     const billion = Math.floor(price / 10);
     const million = Math.floor((price % 10));

@@ -99,7 +99,6 @@ const LoginForm = () => {
             value={password}
             onChange={handlePasswordChange}
           />
-          <div></div>
           <L.LSubmit type="submit">{newAccount ? "Create Account" : "Log in"}</L.LSubmit>
           {error && <span className="authError">{error}</span>}
         </L.LForm>
