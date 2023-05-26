@@ -198,7 +198,11 @@ function Top() {
 
   // 엔터키
   function handleKeyDown(event:React.KeyboardEvent<HTMLInputElement>) {
-      if (event.keyCode === 13) { 
+      if (event.keyCode === 13) {
+        if(pageNo === 0){
+          alert("지역을 선택해주세요")
+          navigate("/");
+        }
         navigate(`/search/${keyword}`);
         CodeApi(keyword);
       }
