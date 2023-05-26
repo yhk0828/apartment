@@ -152,7 +152,7 @@ function Home() {
         <Sidebar>
             <Top></Top>
           <Routes>
-            <Route path="/" element={<div/>} />
+            <Route path="/apartment" element={<div/>} />
             <Route path="/error" element={<Cors />} />
             <Route path="/MyInfo" element={<Myinfo />} />
             <Route path="/Login" element={<LoginForm />} />
