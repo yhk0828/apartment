@@ -2,7 +2,7 @@ import styled from "styled-components";
 import "./Home.css";
 import Top from "../Components/Top";
 import Bottom from "../Components/bottom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import InfoBottom from "../Components/InfoBottom";
 import LoginForm from "../Components/LogIn/LoginForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -58,6 +58,7 @@ function Home() {
   const setInfo = useSetRecoilState<Apartment[]>(InfoState);
   const navigate = useNavigate();
   const keyword = useRecoilValue(keywordState);
+  const {kkeyword}= useParams();
   const KakaoApi = useCallback(() => {
     if (!window.kakao) {
       // Kakao 지도 API가 로드되지 않은 경우, 처리할 내용을 추가합니다.
@@ -112,7 +113,7 @@ function Home() {
 
             iwContent.addEventListener('click', function () {
               if (isLoggedIn2 === true) {
-                navigate(`/search/${keyword}/${i.toString()}`);
+                navigate(`/search/${kkeyword}/${i.toString()}`);
               } else if (isLoggedIn2 === false) {
                 navigate("/Login");
               }
