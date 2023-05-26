@@ -154,8 +154,8 @@ function Home() {
             <Route path="/MyInfo" element={<Myinfo />} />
             <Route path="/Login" element={<LoginForm />} />
             <Route path="/search/:kkeyword" element={<Bottom/>} />
-            <Route path="/search/:kkeyword/:iindex" element={<InfoBottom />} />
-            <Route path="/search/:kkeyword/:iindex/:key" element={<InfoBottom />} />
+            <Route path="/search/:kkeyword/:iiindex" element={<InfoBottom />} />
+            <Route path="/search/:kkeyword/:iiindex/:Ssize" element={<InfoBottom />} />
             <Route path="*" element={<div>경로가 틀렸습니다.</div>} />
           </Routes>
         </Sidebar>

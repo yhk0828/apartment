@@ -97,8 +97,8 @@ export const NumberState3 = atom({
     default: 1,
 });
 
-export const IindexState = atom({
-    key: "IindexState",
+export const SizeState = atom({
+    key: "SizeState",
     default: 0,
 });
 export const InfoState = atom<Apartment[]>({

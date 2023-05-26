@@ -1,7 +1,7 @@
 import { Chart as ChartJs, CategoryScale, LinearScale, LineElement, PointElement, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useRecoilValue } from 'recoil';
-import { IindexState } from '../../recoil/atom';
+import { SizeState } from '../../recoil/atom';
 
 ChartJs.register(
   CategoryScale,
@@ -17,7 +17,7 @@ function isNumber(value:any) {
 }
 
 function LineChart6({ result }: any) {
-    const iindex = useRecoilValue(IindexState);
+    const Size = useRecoilValue(SizeState);
 
   const filledResult = result.map((item: any) =>
     item.map((value: any, index: number, array: any[]) => {
@@ -40,7 +40,7 @@ function LineChart6({ result }: any) {
     datasets: [
       {
         label: `최근 6개월`,
-        data: filledResult[iindex],
+        data: filledResult[Size],
         backgroundColor: '#2272ef',
         borderColor: '#2272ef',
         borderWidth: 3,

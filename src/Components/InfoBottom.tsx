@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
-import { Apartment, dataState, formatPrice, formatPrice2, IindexState, InfoState, zero,} from "../recoil/atom";
+import { Apartment, dataState, formatPrice, formatPrice2, InfoState, SizeState, zero,} from "../recoil/atom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate, useParams } from "react-router-dom";
@@ -123,12 +123,17 @@ function InfoBottom() {
     const Info = useRecoilValue<Apartment[]>(InfoState);
     const navigate = useNavigate();
     //내가 클릭한 아파트이름에 맞는 아파트내용
-    const data = useRecoilValue(dataState);
+    const [data, setData]= useRecoilState(dataState);
     const [clickm2, setClickm2] = useState(false);
     const [click6M, setclick6M] = useState(false);
-    const [iindex, setIindex] = useRecoilState(IindexState);
-    const {kkeyword} = useParams();
+    const [Size, setSize] = useRecoilState(SizeState);
+    const {kkeyword,Ssize} = useParams();
     //동일로 207길의 아파트
+    useEffect(()=>{
+        if(Size === undefined){
+            setSize(Number(Ssize));
+        }
+    },[Ssize]);
     const sameApartment:Apartment[] = data.filter((item: Apartment) => item.아파트.includes(Info[0]?.아파트));
 
     //동일로 207길의 아파트 중에 전용면적이 같은 데이터를 만들어주는 함수 reduce는 누적값 덧셈만 하는게 아니다.
@@ -176,11 +181,11 @@ function InfoBottom() {
 
     //rate == 가격변동률
     let rate = 0;
-    if (sameCashArr[iindex]?.length > 0 ) {
+    if (sameCashArr[Size]?.length > 0 ) {
         if(click6M === true){
-            rate = (sameCashArr[iindex][sameCashArr[iindex]?.length - 1] - sameCashArr[iindex][0]) / sameCashArr[iindex][0] * 100;
+            rate = (sameCashArr[Size][sameCashArr[Size]?.length - 1] - sameCashArr[Size][0]) / sameCashArr[Size][0] * 100;
         }else{
-            rate = (sameCashArr[iindex][sameCashArr[iindex]?.length - 1] - sameCashArr[iindex][3]) / sameCashArr[iindex][3] * 100;
+            rate = (sameCashArr[Size][sameCashArr[Size]?.length - 1] - sameCashArr[Size][3]) / sameCashArr[Size][3] * 100;
         }
     } else {
         rate = 0;
@@ -191,13 +196,13 @@ function InfoBottom() {
     
     let shoPrice: any;
 
-    if (sameCashArr[iindex] && sameCashArr[iindex].length > 0) {
-    shoPrice = sameCashArr[iindex][sameCashArr[iindex].length - 1];
+    if (sameCashArr[Size] && sameCashArr[Size].length > 0) {
+    shoPrice = sameCashArr[Size][sameCashArr[Size].length - 1];
 
     if (isNaN(shoPrice)) {
-        for (let i = 1; i < sameCashArr[iindex].length; i++) {
-        if (sameCashArr[iindex][sameCashArr[iindex].length - i] !== undefined) {
-            shoPrice = sameCashArr[iindex][sameCashArr[iindex].length - i];
+        for (let i = 1; i < sameCashArr[Size].length; i++) {
+        if (sameCashArr[Size][sameCashArr[Size].length - i] !== undefined) {
+            shoPrice = sameCashArr[Size][sameCashArr[Size].length - i];
             break;
         }
         }
@@ -206,10 +211,11 @@ function InfoBottom() {
     shoPrice = null;
     }
     function controlArea (item:any,index:number) {
-        setIindex(index);
+        setSize(index);
         setClickm2(!clickm2);
-        navigate(`/search/${kkeyword}/${iindex}/${Math.floor(item[0].전용면적/3.31)}`)
+        navigate(`/search/${kkeyword}/${Size}/${Math.floor(item[0].전용면적/3.31)}`)
     }
+
     return (
         <>
         <SidebarBottom>
@@ -240,7 +246,7 @@ function InfoBottom() {
                             <B52 isClicked={click6M} onClick={() => setclick6M(true)}>최근6개월</B52>
                         </B5>
                         <B4>
-                            <div onClick={() => setClickm2(!clickm2)}>{Math.floor(sameArea[iindex][0]?.전용면적/3.31)}평 <FontAwesomeIcon icon={faAngleDown}/></div>
+                            <div onClick={() => setClickm2(!clickm2)}>{Math.floor(sameArea[Size][0]?.전용면적/3.31)}평 <FontAwesomeIcon icon={faAngleDown}/></div>
                             {clickm2 ? 
                             <Sul>
                             {sameArea.sort((a, b) => a[0].전용면적 - b[0].전용면적).map((item:any,index:any)=> (
@@ -265,7 +271,7 @@ function InfoBottom() {
                         <B23>평수</B23>
                         <B23>층</B23>
                     </B21>
-                {sameArea[iindex].map((item:any,index:number)=>(
+                {sameArea[Size].map((item:any,index:number)=>(
                     <B21 key={index}>
                         <B22>{item.년}.{zero(item.월)}.{zero(item.일)}</B22>
                         <B22>{formatPrice(parseInt(item.거래금액))}</B22>

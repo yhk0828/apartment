@@ -100,7 +100,7 @@ function Bottom() {
       setClicked(1);
       setDataNum(0);
       setDataNum2(12);
-    },[location,setClicked,setDataNum,setDataNum2]);
+    },[location]);
 
     return (
         <>
