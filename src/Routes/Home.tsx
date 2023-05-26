@@ -12,6 +12,7 @@ import { useEffect, useCallback } from "react";
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Apartment, dataState, formatPrice, InfoState, isLoadingState, isLoggedInState2, keywordState, LocationState } from '../recoil/atom';
 import { useNavigate} from "react-router-dom";
+import Cors from "Components/Cors";
 declare global {
   interface Window {
     kakao: any;
@@ -150,7 +151,8 @@ function Home() {
         <Sidebar>
             <Top></Top>
           <Routes>
-            <Route path="/" element={<div />} />
+            <Route path="/" element={<div/>} />
+            <Route path="/error" element={<Cors />} />
             <Route path="/MyInfo" element={<Myinfo />} />
             <Route path="/Login" element={<LoginForm />} />
             <Route path="/search/:kkeyword" element={<Bottom/>} />

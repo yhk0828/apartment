@@ -190,6 +190,7 @@ function Top() {
         setLocation(doro);
       } catch (error) {
         console.error(error);
+        navigate("/error");
       }finally{
         setIsLoading(false);
       }
